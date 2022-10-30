@@ -1,0 +1,163 @@
+a {
+
+	color: #712c02;
+}
+
+a:before{
+    content: '\201c';
+     top: 0; left: 10px;    
+}
+a:after{
+    content: '\201d';
+    bottom: 0; right: 10px;    
+}
+
+a:hover {
+	color: #c42414;
+	text-decoration: none;
+	text-shadow: 2px 2px;
+	text-shadow: 2px 2px 5px #712c02;
+}
+
+
+#stulle {
+	font-family: 'Patrick Hand' !important;
+	min-height: 75%;
+	position: relative;
+	width: 75%;
+	height: 20em;
+	margin: 0 auto;
+	padding-top: 10em;
+}
+
+#stulle>div {
+	position: absolute;
+	width: 100%;
+	margin: 25px auto;
+	
+	border: solid black;
+	border-color: black;
+	border-width: 3px 3px 5px 5px;
+	border-radius:3% 95% 3% 95%/95% 4% 92% 5%;
+	transform: rotate(-1deg);
+
+}
+
+#stulle>div>p {
+
+  transform: rotate(2deg);
+  margin:15px;
+  padding:0 5px;
+  float:right;
+  background:#fff;
+  border:1px solid #222;
+  box-shadow:3px 3px 0 #222;
+
+}
+
+.light-brown {
+	background-color: #9D7F5E;
+}
+.pattern-brown {
+	background:
+		linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+		linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+		linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+		linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+		linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+		linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+	background-color: #77573B;
+	background-size: 20px 20px;
+}
+.brown {
+	
+	background-color: #77573B;
+	
+}
+
+.white-bread {
+	background: linear-gradient(45deg, #dca 12%, transparent 0, transparent 88%, #dca 0),
+    linear-gradient(135deg, transparent 37%, #a85 0, #a85 63%, transparent 0),
+    linear-gradient(45deg, transparent 37%, #dca 0, #dca 63%, transparent 0) #EDE5CC;
+    background-size: 25px 25px;
+}
+
+.butter {
+	background-color: #D8BE07;
+}
+
+.cream-cheese {
+	background: linear-gradient(#F3EAD6 50%, rgba(255,255,255,0) 0) 0 0,
+	radial-gradient(circle closest-side, #FFFFFF 53%, rgba(255,255,255,0) 0) 0 0,
+	radial-gradient(circle closest-side, #FFFFFF 50%, rgba(255,255,255,0) 0) 55px 0 #EBF6FF;
+	background-size: 110px 200px;
+
+}
+.cheese {
+	background-color:#FCC201;
+	background-image: radial-gradient(white 35%, transparent 16%),
+	radial-gradient(white 35%, transparent 16%);
+	background-size: 60px 60px;
+	background-position: 0 0, 30px 30px;
+}
+
+.guacamole {
+	background-color: #017e3e;
+	background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(69,79,49,.5) 35px, rgba(69,79,49,.5) 70px);
+}
+
+.ham {
+	background-color: #FDCBBC;
+}
+.yellow {
+	background-color: #F6C344;
+	height: 25px;
+}
+	.yellow p {
+		margin-top: -4px !important;
+	}
+
+.dirty-white {
+	background-color: #FFFDD3;
+}
+
+	.dirty-white p {
+		margin-top: -4px !important;
+	}
+.red {
+	background-color: #B11313;
+	height: 25px;
+}
+	.red p {
+		margin-top: -4px !important;
+	}
+.salami {
+	background-color:#FF636D;
+	background-image: radial-gradient(white 15%, transparent 16%),
+	radial-gradient(white 15%, transparent 16%);
+	background-size: 60px 60px;
+	background-position: 0 0, 30px 30px;
+
+}
+#beta-notice {
+	transform: rotate(-45deg);
+	position: fixed;
+	top: 0;
+	left: -60;
+	margin: 10px 10px 0 0;
+	background-color: rgba(255,200,200, 0.7);
+	width: 200px;
+	font-weight: bold;
+	left: -50px;
+	border: 4px double #909090;
+}
+
+#badge-container {
+	font-size: 4em;
+	font-family: 'Tangerine' !important;
+	width: 100%;
+
+}
+	#badge-container {
+		line-height: 1em;
+	}
