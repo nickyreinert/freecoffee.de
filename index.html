@@ -1,74 +1,221 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="freecoffee.de — Die Zufalls-Küche. Pizza, Stulle, Salat oder Cocktail: lass dich überraschen!">
+  <title>freecoffee.de – Die Zufalls-Küche</title>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
 
-	<title>Stullen Maschine</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            "slide-in": "slideIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)"
+          },
+          keyframes: {
+            slideIn: {
+              "0%":   { opacity: "0", transform: "translateY(-16px) scale(0.97)" },
+              "100%": { opacity: "1", transform: "translateY(0) scale(1)" }
+            }
+          }
+        }
+      }
+    }
+  </script>
 
-	<link rel="icon" type="image/x-icon" href="vendor/bootstrap_creative/assets/img/favicon.ico" />
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+          integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfYEqk2Jwjlw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-	<!-- Bootstrap core CSS -->
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Google fonts-->
-	<!-- link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" /-->
-	<!-- link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" /-->
-
-	<link href="vendor/magnific-popup/css/magnific-popup.min.css" rel="stylesheet" />
-	
-	<link href="css/google_fonts.css" rel="stylesheet" />
-	<link href="css/styles.css" rel="stylesheet" />
-		
+  <style>
+    body { -webkit-font-smoothing: antialiased; }
+    /* Scrollbar for profile panel */
+    #profile-panel::-webkit-scrollbar { width: 4px; }
+    #profile-panel::-webkit-scrollbar-track { background: transparent; }
+    #profile-panel::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 99px; }
+  </style>
 </head>
 
-<body>
+<body class="min-h-screen bg-stone-100 font-sans">
 
-	<div class="container">
-		<div class="row my-2">
-			<div class="col-lg-12 text-center">
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MAIN LAYOUT
+  ════════════════════════════════════════════════════════════════════════ -->
+  <div class="max-w-xl mx-auto px-4 pt-8 pb-24">
 
-				<h3 class="text-center mt-0">Stullen-Maschine</h3>
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <div class="text-5xl mb-2 select-none">🎲</div>
+      <h1 class="text-3xl font-extrabold text-stone-800 tracking-tight">freecoffee.de</h1>
+      <p class="text-stone-500 mt-1">Die Zufalls-Küche</p>
+    </header>
 
-				<button id="new-stulle" type="button" class="btn btn-outline-dark">Neue Stulle</button>
-				<!--button id="select-ingredients" type="button" class="btn btn-secondary">Zutaten auswählen</button-->
-				
-			</div>
-		</div>
-			
-		<hr class="divider mb-2" />
+    <!-- ── Import banner (shown when ?p= param present) ────────────────── -->
+    <div id="import-banner" class="hidden mb-4 bg-blue-50 border border-blue-200 rounded-2xl p-4 flex flex-col gap-2">
+      <p class="text-blue-800 font-semibold text-sm">📥 Profil aus Link importieren?</p>
+      <p class="text-blue-700 text-sm">Enthält: <span id="import-summary"></span></p>
+      <div class="flex gap-2 mt-1">
+        <button id="import-accept"
+          class="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors">
+          Übernehmen
+        </button>
+        <button id="import-deny"
+          class="px-4 py-2 bg-blue-100 text-blue-700 rounded-xl text-sm font-semibold hover:bg-blue-200 transition-colors">
+          Ablehnen
+        </button>
+      </div>
+    </div>
 
-		<div class="row">
-			<div class="col-sm text-center">
-				<div id="badge-container"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<div id="stulle">
-				</div>
-			</div>
-		</div>
+    <!-- ── Dish type selector ────────────────────────────────────────────── -->
+    <div class="grid grid-cols-4 gap-2 mb-4">
+      <button data-dish="pizza"
+        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
+        <span class="text-2xl">🍕</span>
+        <span>Pizza</span>
+      </button>
+      <button data-dish="stulle"
+        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
+        <span class="text-2xl">🥪</span>
+        <span>Stulle</span>
+      </button>
+      <button data-dish="salat"
+        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
+        <span class="text-2xl">🥗</span>
+        <span>Salat</span>
+      </button>
+      <button data-dish="cocktail"
+        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
+        <span class="text-2xl">🍹</span>
+        <span>Cocktail</span>
+      </button>
+    </div>
 
-	</div>
-	
-	<!--div id="beta-notice" class="row justify-content-center p-3">BETA</div> <!-- row -->
+    <!-- ── Error message ─────────────────────────────────────────────────── -->
+    <div id="error-msg"
+      class="hidden mb-4 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm">
+    </div>
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="vendor/magnific-popup/js/jquery.magnific-popup.min.js"></script>
-	<script src="vendor/fontawesome/js/all.js"></script>
-	<script src="vendor/jquery/jquery.easing.min.js"></script>
+    <!-- ── Generate button ───────────────────────────────────────────────── -->
+    <button id="generate-btn"
+      class="w-full py-4 rounded-2xl text-white text-lg font-bold tracking-wide shadow-md transition-all active:scale-95">
+      🎲 Würfeln!
+    </button>
 
-	<script src="js/localisation.js"></script>
-	<script src="js/ingredients.js"></script>
-	<script src="js/scripts.js"></script>
+    <!-- ── Result card ───────────────────────────────────────────────────── -->
+    <div id="result-card"
+      class="hidden mt-5 bg-white rounded-2xl shadow-lg overflow-hidden">
+
+      <!-- Card header -->
+      <div class="px-6 pt-6 pb-4">
+        <h2 id="dish-name"
+          class="text-xl font-bold text-stone-800 flex items-center flex-wrap gap-1 leading-snug">
+        </h2>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-stone-100 mx-6"></div>
+
+      <!-- Slots -->
+      <div id="slots-container" class="px-6 py-4 space-y-3"></div>
+
+      <!-- Divider -->
+      <div class="border-t border-stone-100 mx-6"></div>
+
+      <!-- Action buttons -->
+      <div class="px-6 py-4 flex flex-wrap gap-2">
+        <button id="reroll-btn"
+          class="flex-1 min-w-[120px] py-2.5 px-4 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-sm font-semibold transition-colors">
+          Nochmal 🎲
+        </button>
+        <button id="pdf-btn"
+          class="flex-1 min-w-[120px] py-2.5 px-4 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-sm font-semibold transition-colors">
+          Rezept 📥
+        </button>
+        <a id="amazon-btn"
+          target="_blank" rel="noopener"
+          class="hidden flex-1 min-w-[120px] py-2.5 px-4 bg-amber-400 hover:bg-amber-500 text-amber-900 rounded-xl text-sm font-semibold text-center transition-colors">
+          Bestellen 🛒
+        </a>
+        <button id="special-btn"
+          class="hidden flex-1 min-w-[120px] py-2.5 px-4 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-xl text-sm font-semibold transition-colors border border-amber-200">
+          Besondere Zutat ✨
+        </button>
+      </div>
+
+      <!-- Special ingredient (hidden until special-btn clicked) -->
+      <div id="special-ingredient"
+        class="hidden mx-6 mb-5 px-4 py-3 bg-amber-50 rounded-xl border border-amber-200 text-sm">
+      </div>
+    </div>
+
+  </div><!-- /max-w-xl -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       BOTTOM BAR
+  ════════════════════════════════════════════════════════════════════════ -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 px-4 py-3 flex justify-end max-w-xl mx-auto" style="left:50%;transform:translateX(-50%);">
+    <button id="profile-btn"
+      class="flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 text-sm font-semibold transition-colors">
+      ⚙️ Zutaten-Profil
+    </button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PROFILE PANEL (full-screen overlay)
+  ════════════════════════════════════════════════════════════════════════ -->
+  <div id="profile-panel"
+    class="hidden fixed inset-0 bg-stone-50 z-50 overflow-y-auto"
+    role="dialog" aria-modal="true" aria-label="Zutaten-Profil">
+
+    <div class="max-w-xl mx-auto px-4 py-6 pb-24">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-stone-800">⚙️ Zutaten-Profil</h2>
+        <button id="close-profile"
+          class="w-9 h-9 flex items-center justify-center rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-600 text-lg font-bold transition-colors"
+          aria-label="Schließen">✕</button>
+      </div>
+
+      <!-- Legend -->
+      <div class="flex gap-4 mb-5 text-sm text-stone-600">
+        <span class="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 border border-green-200 rounded-lg">
+          ❤️ <span class="font-semibold">Lieblingskram</span> – höheres Gewicht beim Würfeln
+        </span>
+        <span class="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg">
+          🤢 <span class="font-semibold">Kotzliste</span> – nie mehr im Ergebnis
+        </span>
+      </div>
+
+      <!-- Ingredient list (filled by JS) -->
+      <div id="profile-ingredients" class="space-y-6"></div>
+
+      <!-- Share profile -->
+      <div class="mt-8 pt-6 border-t border-stone-200">
+        <button id="share-profile-btn"
+          class="w-full py-3 px-4 bg-stone-800 hover:bg-stone-900 text-white rounded-xl text-sm font-semibold transition-colors">
+          🔗 Profil teilen
+        </button>
+        <p class="text-xs text-stone-400 text-center mt-2">Erzeugt einen Link, mit dem andere dein Profil übernehmen können.</p>
+      </div>
+
+    </div>
+  </div><!-- /profile-panel -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       APP ENTRY POINT
+  ════════════════════════════════════════════════════════════════════════ -->
+  <script type="module" src="js/app.js"></script>
 
 </body>
-
 </html>
