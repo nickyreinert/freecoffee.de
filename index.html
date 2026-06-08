@@ -6,24 +6,22 @@
   <meta name="description" content="freecoffee.de — Die Zufalls-Küche. Pizza, Stulle, Salat oder Cocktail: lass dich überraschen!">
   <title>freecoffee.de – Die Zufalls-Küche</title>
 
-  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
 
-  <!-- Tailwind CSS -->
+  <!-- Typefaces -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          animation: {
-            "slide-in": "slideIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)"
-          },
-          keyframes: {
-            slideIn: {
-              "0%":   { opacity: "0", transform: "translateY(-16px) scale(0.97)" },
-              "100%": { opacity: "1", transform: "translateY(0) scale(1)" }
-            }
-          }
+          fontFamily: { display: ['"Playfair Display"', 'Georgia', 'serif'] },
+          animation:  { 'slide-up': 'slideUp 0.45s cubic-bezier(0.34,1.56,0.64,1)' },
+          keyframes:  { slideUp: { '0%': { opacity:'0', transform:'translateY(12px) scale(0.98)' }, '100%': { opacity:'1', transform:'translateY(0) scale(1)' } } }
         }
       }
     }
@@ -31,191 +29,328 @@
 
   <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
-          integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfYEqk2Jwjlw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfYEqk2Jwjlw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <style>
-    body { -webkit-font-smoothing: antialiased; }
-    /* Scrollbar for profile panel */
-    #profile-panel::-webkit-scrollbar { width: 4px; }
-    #profile-panel::-webkit-scrollbar-track { background: transparent; }
-    #profile-panel::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 99px; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #FEF9EE;
+      color: #2C1F14;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Dish tab states ──────────────────────────────────────────── */
+    .dish-tab {
+      background: #FFFDF7;
+      border: 2px solid #E4D5BB;
+      border-radius: 14px;
+      padding: 14px 6px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: border-color .18s, background .18s, box-shadow .18s;
+      color: #7A6248;
+      font-weight: 500;
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+    .dish-tab:hover { border-color: #C2A882; }
+
+    .dish-tab[data-dish="pizza"][data-active]    { border-color: #C8391D; background: #FFF4F2; color: #C8391D; box-shadow: 0 2px 10px rgba(200,57,29,.15); }
+    .dish-tab[data-dish="stulle"][data-active]   { border-color: #9B5B2A; background: #FFF8F3; color: #9B5B2A; box-shadow: 0 2px 10px rgba(155,91,42,.15); }
+    .dish-tab[data-dish="salat"][data-active]    { border-color: #2A6B35; background: #F4FAF4; color: #2A6B35; box-shadow: 0 2px 10px rgba(42,107,53,.15); }
+    .dish-tab[data-dish="cocktail"][data-active] { border-color: #6B3A8B; background: #FAF4FF; color: #6B3A8B; box-shadow: 0 2px 10px rgba(107,58,139,.15); }
+
+    /* ── Generate button colours ─────────────────────────────────── */
+    #generate-btn {
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 18px;
+      color: white;
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      border: none;
+      cursor: pointer;
+      transition: filter .15s, transform .1s, box-shadow .15s;
+      position: relative;
+      overflow: hidden;
+    }
+    #generate-btn:hover  { filter: brightness(1.07); }
+    #generate-btn:active { transform: scale(0.98); filter: brightness(0.95); }
+
+    #generate-btn.btn-pizza    { background: linear-gradient(135deg,#C8391D,#E04A2C); box-shadow: 0 6px 24px rgba(200,57,29,.35); }
+    #generate-btn.btn-stulle   { background: linear-gradient(135deg,#9B5B2A,#B36830); box-shadow: 0 6px 24px rgba(155,91,42,.35); }
+    #generate-btn.btn-salat    { background: linear-gradient(135deg,#2A6B35,#358042); box-shadow: 0 6px 24px rgba(42,107,53,.35); }
+    #generate-btn.btn-cocktail { background: linear-gradient(135deg,#6B3A8B,#7D489F); box-shadow: 0 6px 24px rgba(107,58,139,.35); }
+
+    /* ── Recipe card ─────────────────────────────────────────────── */
+    .recipe-card {
+      background: #FFFDF7;
+      border: 1px solid #E4D5BB;
+      border-radius: 20px;
+      box-shadow: 0 4px 28px rgba(120,80,30,.1), 0 1px 4px rgba(120,80,30,.06);
+    }
+
+    /* ── Ingredient badge ────────────────────────────────────────── */
+    .ing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: white;
+      border: 1.5px solid #E4D5BB;
+      border-radius: 8px;
+      padding: 4px 11px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #3A2810;
+      transition: border-color .12s;
+    }
+    .ing-badge:hover { border-color: #C2A882; }
+
+    /* ── Slot label ──────────────────────────────────────────────── */
+    .slot-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #A89070;
+      min-width: 4.5rem;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    /* ── Action button variants ──────────────────────────────────── */
+    .btn-action {
+      flex: 1;
+      min-width: 120px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+      border: 1.5px solid transparent;
+      line-height: 1.3;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-action-secondary {
+      background: #F7EED8;
+      color: #6B4226;
+      border-color: #E4D0A8;
+    }
+    .btn-action-secondary:hover { background: #EFE0C0; }
+
+    .btn-action-amazon {
+      background: #F59E0B;
+      color: #78350F;
+      border-color: #F59E0B;
+    }
+    .btn-action-amazon:hover { background: #D97706; border-color: #D97706; color: white; }
+
+    .btn-action-special {
+      background: transparent;
+      color: #92400E;
+      border-color: #E4C07A;
+    }
+    .btn-action-special:hover { background: #FFFBEB; }
+
+    /* ── Special ingredient callout ──────────────────────────────── */
+    .special-box {
+      margin: 0 20px 20px;
+      padding: 14px 16px;
+      background: #FFFBEB;
+      border: 1.5px solid #F0CC70;
+      border-radius: 12px;
+    }
+
+    /* ── Profile overlay ─────────────────────────────────────────── */
+    #profile-panel {
+      background: #FEF9EE;
+    }
+    #profile-panel::-webkit-scrollbar       { width: 4px; }
+    #profile-panel::-webkit-scrollbar-thumb { background: #D4C5A8; border-radius: 99px; }
+
+    .profile-row        { border: 1.5px solid #E4D5BB; border-radius: 10px; background: #FFFDF7; }
+    .profile-row.is-fav  { background: #F3FAF4; border-color: #A7D7B0; }
+    .profile-row.is-kotz { background: #FFF4F4; border-color: #F5B8B8; }
+
+    .profile-btn-fav  { border-radius: 8px; padding: 4px 8px; transition: background .12s; }
+    .profile-btn-fav:hover  { background: #DCF0E0; }
+    .profile-btn-fav.active { background: #A7D7B0; }
+
+    .profile-btn-kotz  { border-radius: 8px; padding: 4px 8px; transition: background .12s; }
+    .profile-btn-kotz:hover  { background: #FAD7D7; }
+    .profile-btn-kotz.active { background: #F5B8B8; }
+
+    /* ── Warm divider ────────────────────────────────────────────── */
+    .warm-divider { border-color: #E8D9C0; }
+
+    /* ── Import banner ───────────────────────────────────────────── */
+    .import-banner { background: #EFF8FF; border: 1.5px solid #BAD7F5; border-radius: 16px; }
+
+    /* ── Error ───────────────────────────────────────────────────── */
+    .error-box { background: #FFF4F4; border: 1.5px solid #F5B8B8; border-radius: 12px; color: #991B1B; }
   </style>
 </head>
 
-<body class="min-h-screen bg-stone-100 font-sans">
+<body>
+<div class="max-w-xl mx-auto px-4 pt-10 pb-24">
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       MAIN LAYOUT
-  ════════════════════════════════════════════════════════════════════════ -->
-  <div class="max-w-xl mx-auto px-4 pt-8 pb-24">
-
-    <!-- Header -->
-    <header class="text-center mb-8">
-      <div class="text-5xl mb-2 select-none">🎲</div>
-      <h1 class="text-3xl font-extrabold text-stone-800 tracking-tight">freecoffee.de</h1>
-      <p class="text-stone-500 mt-1">Die Zufalls-Küche</p>
-    </header>
-
-    <!-- ── Import banner (shown when ?p= param present) ────────────────── -->
-    <div id="import-banner" class="hidden mb-4 bg-blue-50 border border-blue-200 rounded-2xl p-4 flex flex-col gap-2">
-      <p class="text-blue-800 font-semibold text-sm">📥 Profil aus Link importieren?</p>
-      <p class="text-blue-700 text-sm">Enthält: <span id="import-summary"></span></p>
-      <div class="flex gap-2 mt-1">
-        <button id="import-accept"
-          class="px-4 py-2 bg-blue-600 text-white rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors">
-          Übernehmen
-        </button>
-        <button id="import-deny"
-          class="px-4 py-2 bg-blue-100 text-blue-700 rounded-xl text-sm font-semibold hover:bg-blue-200 transition-colors">
-          Ablehnen
-        </button>
-      </div>
+  <!-- ══════════════════════════════════════════════════════════════
+       Header
+  ═══════════════════════════════════════════════════════════════ -->
+  <header class="flex items-start justify-between mb-8">
+    <div>
+      <div class="text-5xl mb-1 leading-none select-none">🎲</div>
+      <h1 class="font-display text-[2rem] leading-tight font-bold text-[#2C1F14]">freecoffee.de</h1>
+      <p class="font-display italic text-sm text-[#A89070] mt-0.5">Die Zufalls-Küche</p>
     </div>
-
-    <!-- ── Dish type selector ────────────────────────────────────────────── -->
-    <div class="grid grid-cols-4 gap-2 mb-4">
-      <button data-dish="pizza"
-        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
-        <span class="text-2xl">🍕</span>
-        <span>Pizza</span>
-      </button>
-      <button data-dish="stulle"
-        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
-        <span class="text-2xl">🥪</span>
-        <span>Stulle</span>
-      </button>
-      <button data-dish="salat"
-        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
-        <span class="text-2xl">🥗</span>
-        <span>Salat</span>
-      </button>
-      <button data-dish="cocktail"
-        class="dish-tab rounded-xl py-3 flex flex-col items-center gap-1 text-sm transition-all">
-        <span class="text-2xl">🍹</span>
-        <span>Cocktail</span>
-      </button>
-    </div>
-
-    <!-- ── Error message ─────────────────────────────────────────────────── -->
-    <div id="error-msg"
-      class="hidden mb-4 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm">
-    </div>
-
-    <!-- ── Generate button ───────────────────────────────────────────────── -->
-    <button id="generate-btn"
-      class="w-full py-4 rounded-2xl text-white text-lg font-bold tracking-wide shadow-md transition-all active:scale-95">
-      🎲 Würfeln!
-    </button>
-
-    <!-- ── Result card ───────────────────────────────────────────────────── -->
-    <div id="result-card"
-      class="hidden mt-5 bg-white rounded-2xl shadow-lg overflow-hidden">
-
-      <!-- Card header -->
-      <div class="px-6 pt-6 pb-4">
-        <h2 id="dish-name"
-          class="text-xl font-bold text-stone-800 flex items-center flex-wrap gap-1 leading-snug">
-        </h2>
-      </div>
-
-      <!-- Divider -->
-      <div class="border-t border-stone-100 mx-6"></div>
-
-      <!-- Slots -->
-      <div id="slots-container" class="px-6 py-4 space-y-3"></div>
-
-      <!-- Divider -->
-      <div class="border-t border-stone-100 mx-6"></div>
-
-      <!-- Action buttons -->
-      <div class="px-6 py-4 flex flex-wrap gap-2">
-        <button id="reroll-btn"
-          class="flex-1 min-w-[120px] py-2.5 px-4 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-sm font-semibold transition-colors">
-          Nochmal 🎲
-        </button>
-        <button id="pdf-btn"
-          class="flex-1 min-w-[120px] py-2.5 px-4 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-sm font-semibold transition-colors">
-          Rezept 📥
-        </button>
-        <a id="amazon-btn"
-          target="_blank" rel="noopener"
-          class="hidden flex-1 min-w-[120px] py-2.5 px-4 bg-amber-400 hover:bg-amber-500 text-amber-900 rounded-xl text-sm font-semibold text-center transition-colors">
-          Bestellen 🛒
-        </a>
-        <button id="special-btn"
-          class="hidden flex-1 min-w-[120px] py-2.5 px-4 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-xl text-sm font-semibold transition-colors border border-amber-200">
-          Besondere Zutat ✨
-        </button>
-      </div>
-
-      <!-- Special ingredient (hidden until special-btn clicked) -->
-      <div id="special-ingredient"
-        class="hidden mx-6 mb-5 px-4 py-3 bg-amber-50 rounded-xl border border-amber-200 text-sm">
-      </div>
-    </div>
-
-  </div><!-- /max-w-xl -->
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       BOTTOM BAR
-  ════════════════════════════════════════════════════════════════════════ -->
-  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 px-4 py-3 flex justify-end max-w-xl mx-auto" style="left:50%;transform:translateX(-50%);">
     <button id="profile-btn"
-      class="flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 text-sm font-semibold transition-colors">
-      ⚙️ Zutaten-Profil
+      title="Zutaten-Profil"
+      class="mt-1 flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#F7EED8] hover:bg-[#EFE0C0] text-[#6B4226] text-xs font-semibold transition-colors border border-[#E4D0A8]">
+      <span class="text-sm">⚙️</span> Profil
+    </button>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       Profile import banner
+  ═══════════════════════════════════════════════════════════════ -->
+  <div id="import-banner" class="hidden import-banner p-4 mb-5">
+    <p class="font-semibold text-[#1A4F7A] text-sm mb-1">📥 Profil aus Link importieren?</p>
+    <p class="text-[#2C6A9A] text-sm mb-3">Enthält: <span id="import-summary"></span></p>
+    <div class="flex gap-2">
+      <button id="import-accept"
+        class="px-4 py-2 bg-[#2B76C2] text-white rounded-xl text-sm font-semibold hover:bg-[#2060A8] transition-colors">
+        Übernehmen
+      </button>
+      <button id="import-deny"
+        class="px-4 py-2 bg-[#D6EAF8] text-[#1A4F7A] rounded-xl text-sm font-semibold hover:bg-[#C3DFF5] transition-colors">
+        Ablehnen
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       Dish selector
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="grid grid-cols-4 gap-2.5 mb-5">
+    <button class="dish-tab" data-dish="pizza">
+      <span class="text-[28px] leading-none">🍕</span>
+      <span>Pizza</span>
+    </button>
+    <button class="dish-tab" data-dish="stulle">
+      <span class="text-[28px] leading-none">🥪</span>
+      <span>Stulle</span>
+    </button>
+    <button class="dish-tab" data-dish="salat">
+      <span class="text-[28px] leading-none">🥗</span>
+      <span>Salat</span>
+    </button>
+    <button class="dish-tab" data-dish="cocktail">
+      <span class="text-[28px] leading-none">🍹</span>
+      <span>Cocktail</span>
     </button>
   </div>
 
+  <!-- ══════════════════════════════════════════════════════════════
+       Error message
+  ═══════════════════════════════════════════════════════════════ -->
+  <div id="error-msg" class="hidden error-box px-4 py-3 mb-4 text-sm"></div>
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       PROFILE PANEL (full-screen overlay)
-  ════════════════════════════════════════════════════════════════════════ -->
-  <div id="profile-panel"
-    class="hidden fixed inset-0 bg-stone-50 z-50 overflow-y-auto"
-    role="dialog" aria-modal="true" aria-label="Zutaten-Profil">
+  <!-- ══════════════════════════════════════════════════════════════
+       Generate button
+  ═══════════════════════════════════════════════════════════════ -->
+  <button id="generate-btn" class="btn-pizza">🎲 &thinsp;Würfeln!</button>
 
-    <div class="max-w-xl mx-auto px-4 py-6 pb-24">
+  <!-- ══════════════════════════════════════════════════════════════
+       Result card
+  ═══════════════════════════════════════════════════════════════ -->
+  <div id="result-card" class="hidden recipe-card mt-5 overflow-hidden">
 
-      <!-- Header -->
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-stone-800">⚙️ Zutaten-Profil</h2>
-        <button id="close-profile"
-          class="w-9 h-9 flex items-center justify-center rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-600 text-lg font-bold transition-colors"
-          aria-label="Schließen">✕</button>
-      </div>
-
-      <!-- Legend -->
-      <div class="flex gap-4 mb-5 text-sm text-stone-600">
-        <span class="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 border border-green-200 rounded-lg">
-          ❤️ <span class="font-semibold">Lieblingskram</span> – höheres Gewicht beim Würfeln
-        </span>
-        <span class="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg">
-          🤢 <span class="font-semibold">Kotzliste</span> – nie mehr im Ergebnis
-        </span>
-      </div>
-
-      <!-- Ingredient list (filled by JS) -->
-      <div id="profile-ingredients" class="space-y-6"></div>
-
-      <!-- Share profile -->
-      <div class="mt-8 pt-6 border-t border-stone-200">
-        <button id="share-profile-btn"
-          class="w-full py-3 px-4 bg-stone-800 hover:bg-stone-900 text-white rounded-xl text-sm font-semibold transition-colors">
-          🔗 Profil teilen
-        </button>
-        <p class="text-xs text-stone-400 text-center mt-2">Erzeugt einen Link, mit dem andere dein Profil übernehmen können.</p>
-      </div>
-
+    <!-- Dish name -->
+    <div class="px-6 pt-6 pb-4">
+      <h2 id="dish-name"
+        class="font-display text-[1.35rem] leading-snug font-bold text-[#2C1F14] flex flex-wrap items-baseline gap-2">
+      </h2>
     </div>
-  </div><!-- /profile-panel -->
+
+    <hr class="warm-divider border-t mx-6">
+
+    <!-- Ingredient slots -->
+    <div id="slots-container" class="px-6 py-4 space-y-3"></div>
+
+    <hr class="warm-divider border-t mx-6">
+
+    <!-- Actions -->
+    <div class="px-6 py-4 flex flex-wrap gap-2">
+      <button id="reroll-btn" class="btn-action btn-action-secondary">Nochmal 🎲</button>
+      <button id="pdf-btn"    class="btn-action btn-action-secondary">Rezept &thinsp;📥</button>
+      <a id="amazon-btn"   class="btn-action btn-action-amazon hidden" target="_blank" rel="noopener">Bestellen &thinsp;🛒</a>
+      <button id="special-btn" class="btn-action btn-action-special hidden">Besondere Zutat &thinsp;✨</button>
+    </div>
+
+    <!-- Special ingredient reveal -->
+    <div id="special-ingredient" class="hidden special-box">
+    </div>
+
+  </div><!-- /result-card -->
+
+</div><!-- /container -->
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       APP ENTRY POINT
-  ════════════════════════════════════════════════════════════════════════ -->
-  <script type="module" src="js/app.js"></script>
+<!-- ══════════════════════════════════════════════════════════════════
+     Profile overlay (full-screen)
+═══════════════════════════════════════════════════════════════════ -->
+<div id="profile-panel"
+  class="hidden fixed inset-0 z-50 overflow-y-auto"
+  role="dialog" aria-modal="true" aria-label="Zutaten-Profil">
 
+  <div class="max-w-xl mx-auto px-4 py-8 pb-24">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="font-display text-xl font-bold text-[#2C1F14]">Zutaten-Profil</h2>
+      <button id="close-profile"
+        class="w-9 h-9 flex items-center justify-center rounded-xl bg-[#F0E4CC] hover:bg-[#E4D0A8] text-[#6B4226] text-lg font-bold transition-colors"
+        aria-label="Schließen">✕</button>
+    </div>
+
+    <!-- Legend -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <span class="flex items-center gap-1.5 text-xs font-medium text-[#166534] bg-[#F0FAF1] border border-[#A7D7B0] px-3 py-1.5 rounded-lg">
+        ❤️ Lieblingskram — mehr Gewicht
+      </span>
+      <span class="flex items-center gap-1.5 text-xs font-medium text-[#991B1B] bg-[#FFF4F4] border border-[#F5B8B8] px-3 py-1.5 rounded-lg">
+        🤢 Kotzliste — nie wieder
+      </span>
+    </div>
+
+    <!-- Ingredient list -->
+    <div id="profile-ingredients" class="space-y-6"></div>
+
+    <!-- Share -->
+    <div class="mt-8 pt-6 border-t border-[#E4D5BB]">
+      <button id="share-profile-btn"
+        class="w-full py-3.5 px-4 bg-[#2C1F14] hover:bg-[#3D2E1E] text-[#FEF9EE] rounded-2xl text-sm font-semibold transition-colors">
+        🔗 Profil teilen
+      </button>
+      <p class="text-xs text-[#A89070] text-center mt-2">
+        Erzeugt einen Link, mit dem andere dein Profil übernehmen können.
+      </p>
+    </div>
+
+  </div>
+</div><!-- /profile-panel -->
+
+
+<script type="module" src="js/app.js"></script>
 </body>
 </html>

@@ -1,10 +1,1 @@
-/* freecoffee.de — custom styles (Tailwind handles the rest) */
-
-/* Prevent layout shift from Tailwind CDN loading */
-body { -webkit-font-smoothing: antialiased; }
-
-/* Bottom bar centering fix for non-full-width screens */
-.bottom-bar-centered {
-  left: 50%;
-  transform: translateX(-50%);
-}
+/* freecoffee.de — additional styles (Tailwind + custom CSS in index.html handle the rest) */
