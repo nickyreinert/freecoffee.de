@@ -65,6 +65,7 @@
     .dish-tab[data-dish="stulle"][data-active]   { border-color: #9B5B2A; background: #FFF8F3; color: #9B5B2A; box-shadow: 0 2px 10px rgba(155,91,42,.15); }
     .dish-tab[data-dish="salat"][data-active]    { border-color: #2A6B35; background: #F4FAF4; color: #2A6B35; box-shadow: 0 2px 10px rgba(42,107,53,.15); }
     .dish-tab[data-dish="cocktail"][data-active] { border-color: #6B3A8B; background: #FAF4FF; color: #6B3A8B; box-shadow: 0 2px 10px rgba(107,58,139,.15); }
+    .dish-tab[data-dish="coffee"][data-active]   { border-color: #6B5344; background: #FEF5F2; color: #6B5344; box-shadow: 0 2px 10px rgba(107,83,68,.15); }
 
     /* ── Generate button colours ─────────────────────────────────── */
     #generate-btn {
@@ -88,6 +89,7 @@
     #generate-btn.btn-stulle   { background: linear-gradient(135deg,#9B5B2A,#B36830); box-shadow: 0 6px 24px rgba(155,91,42,.35); }
     #generate-btn.btn-salat    { background: linear-gradient(135deg,#2A6B35,#358042); box-shadow: 0 6px 24px rgba(42,107,53,.35); }
     #generate-btn.btn-cocktail { background: linear-gradient(135deg,#6B3A8B,#7D489F); box-shadow: 0 6px 24px rgba(107,58,139,.35); }
+    #generate-btn.btn-coffee   { background: linear-gradient(135deg,#6B5344,#7D6851); box-shadow: 0 6px 24px rgba(107,83,68,.35); }
 
     /* ── Recipe card ─────────────────────────────────────────────── */
     .recipe-card {
@@ -241,7 +243,7 @@
   <!-- ══════════════════════════════════════════════════════════════
        Dish selector
   ═══════════════════════════════════════════════════════════════ -->
-  <div class="grid grid-cols-4 gap-2.5 mb-5">
+  <div class="grid grid-cols-5 gap-2.5 mb-5">
     <button class="dish-tab" data-dish="pizza">
       <span class="text-[28px] leading-none">🍕</span>
       <span>Pizza</span>
@@ -257,6 +259,10 @@
     <button class="dish-tab" data-dish="cocktail">
       <span class="text-[28px] leading-none">🍹</span>
       <span>Cocktail</span>
+    </button>
+    <button class="dish-tab" data-dish="coffee">
+      <span class="text-[28px] leading-none">☕</span>
+      <span>Kaffee</span>
     </button>
   </div>
 

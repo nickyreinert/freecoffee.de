@@ -60,6 +60,13 @@ export const DISH_CONFIGS = {
   }
 };
 
+// Coffee config — separate simpler model (no slots)
+export const COFFEE_CONFIG = {
+  type: "coffee",
+  label: "Kaffee",
+  emoji: "☕",
+};
+
 // Tailwind color classes per dish type (bg, border, text, badge)
 export const DISH_COLORS = {
   pizza: {
