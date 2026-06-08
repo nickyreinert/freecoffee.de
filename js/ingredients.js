@@ -607,5 +607,225 @@ export const INGREDIENTS = [
     excludes: [], amazon_asin: null,
     tags_name: ["sonnig", "farbenfroh", "frisch"],
     noun_form: "Orange", rarity: 2
+  },
+
+  // ─── BURGER: bun ────────────────────────────────────────────────────────
+  {
+    id: "klassisches_burger_brötchen", name: "Klassisches Brötchen", emoji: "🍞",
+    tags: ["mild", "soft", "classic"],
+    dishes: ["burger"], roles: { burger: "bun" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["klassisch", "weich", "zeitlos"],
+    noun_form: "Klassiker", rarity: 1
+  },
+  {
+    id: "vollkorn_burger_brötchen", name: "Vollkorn-Brötchen", emoji: "🌾",
+    tags: ["nutty", "hearty", "wholesome"],
+    dishes: ["burger"], roles: { burger: "bun" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["kernig", "rustikal", "vollwertig"],
+    noun_form: "Korn", rarity: 3
+  },
+  {
+    id: "brioche_brötchen", name: "Brioche-Brötchen", emoji: "✨",
+    tags: ["sweet", "buttery", "fluffy"],
+    dishes: ["burger"], roles: { burger: "bun" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["süßlich", "zart", "luxuriös"],
+    noun_form: "Träum", rarity: 4
+  },
+
+  // ─── BURGER: patty ──────────────────────────────────────────────────────
+  {
+    id: "rind_patty", name: "Rind-Patty", emoji: "🥩",
+    tags: ["savory", "classic", "juicy"],
+    dishes: ["burger"], roles: { burger: "patty" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["saftig", "klassisch", "herzhaft"],
+    noun_form: "Rind", rarity: 1
+  },
+  {
+    id: "hähnchen_patty", name: "Hähnchen-Patty", emoji: "🍗",
+    tags: ["light", "lean", "tender"],
+    dishes: ["burger"], roles: { burger: "patty" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["leicht", "zart", "saftig"],
+    noun_form: "Hähnchen", rarity: 2
+  },
+  {
+    id: "veggie_patty", name: "Veggie-Patty", emoji: "🌱",
+    tags: ["hearty", "nutritious", "plant-based"],
+    dishes: ["burger"], roles: { burger: "patty" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["grün", "nachhaltig", "gesund"],
+    noun_form: "Grün", rarity: 3
+  },
+  {
+    id: "pilz_patty", name: "Pilz-Patty", emoji: "🍄",
+    tags: ["umami", "earthy", "meaty"],
+    dishes: ["burger"], roles: { burger: "patty" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["würzig", "erdig", "tauglich"],
+    noun_form: "Wald", rarity: 4
+  },
+  {
+    id: "fisch_patty", name: "Fisch-Patty", emoji: "🐟",
+    tags: ["light", "fresh", "crispy"],
+    dishes: ["burger"], roles: { burger: "patty" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["frisch", "knusprig", "leicht"],
+    noun_form: "Meer", rarity: 4
+  },
+
+  // ─── BURGER: cheese ─────────────────────────────────────────────────────
+  {
+    id: "cheddar_käse", name: "Cheddar", emoji: "🧀",
+    tags: ["sharp", "classic", "melty"],
+    dishes: ["burger"], roles: { burger: "cheese" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["würzig", "klassisch", "cremig"],
+    noun_form: "Gold", rarity: 1
+  },
+  {
+    id: "schweizer_käse", name: "Schweizer Käse", emoji: "🇨🇭",
+    tags: ["nutty", "mild", "holey"],
+    dishes: ["burger"], roles: { burger: "cheese" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["süßlich", "nussig", "elegant"],
+    noun_form: "Alpen", rarity: 2
+  },
+  {
+    id: "blauschimmel_käse", name: "Blauschimmel", emoji: "💙",
+    tags: ["pungent", "creamy", "bold"],
+    dishes: ["burger"], roles: { burger: "cheese" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["kühn", "würzig", "mutig"],
+    noun_form: "Abenteuer", rarity: 5
+  },
+  {
+    id: "mozzarella_käse", name: "Mozzarella", emoji: "⚪",
+    tags: ["mild", "stretchy", "fresh"],
+    dishes: ["burger"], roles: { burger: "cheese" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["frisch", "mild", "cremig"],
+    noun_form: "Süde", rarity: 2
+  },
+
+  // ─── BURGER: sauce ──────────────────────────────────────────────────────
+  {
+    id: "burger_ketchup", name: "Ketchup", emoji: "🍅",
+    tags: ["sweet", "tangy", "classic"],
+    dishes: ["burger"], roles: { burger: "sauce" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["klassisch", "süßlich", "frisch"],
+    noun_form: "Rot", rarity: 1
+  },
+  {
+    id: "burger_mayonnaise", name: "Mayonnaise", emoji: "💛",
+    tags: ["creamy", "rich", "smooth"],
+    dishes: ["burger"], roles: { burger: "sauce" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["cremig", "samtig", "reichhaltig"],
+    noun_form: "Creme", rarity: 1
+  },
+  {
+    id: "burger_sauce", name: "Burger-Sauce", emoji: "🍯",
+    tags: ["savory", "umami", "complex"],
+    dishes: ["burger"], roles: { burger: "sauce" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["würzig", "geheim", "verlockend"],
+    noun_form: "Geheimnis", rarity: 3
+  },
+  {
+    id: "sriracha_mayo", name: "Sriracha-Mayo", emoji: "🌶️",
+    tags: ["spicy", "creamy", "bold"],
+    dishes: ["burger"], roles: { burger: "sauce" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["scharf", "mutig", "exotisch"],
+    noun_form: "Feuer", rarity: 4
+  },
+  {
+    id: "barbecue_sauce", name: "BBQ-Sauce", emoji: "🔥",
+    tags: ["smoky", "sweet", "tangy"],
+    dishes: ["burger"], roles: { burger: "sauce" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["rauchig", "wild", "lagerfeuer"],
+    noun_form: "Flamme", rarity: 3
+  },
+
+  // ─── BURGER: veggie ─────────────────────────────────────────────────────
+  {
+    id: "burger_tomate", name: "Tomaten", emoji: "🍅",
+    tags: ["fresh", "tangy", "juicy"],
+    dishes: ["burger"], roles: { burger: "veggie" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["frisch", "saftig", "sonnig"],
+    noun_form: "Sonne", rarity: 1
+  },
+  {
+    id: "burger_salat", name: "Salat", emoji: "🥬",
+    tags: ["crisp", "fresh", "light"],
+    dishes: ["burger"], roles: { burger: "veggie" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["knackig", "frisch", "grün"],
+    noun_form: "Natur", rarity: 1
+  },
+  {
+    id: "burger_zwiebel", name: "Zwiebeln", emoji: "🧅",
+    tags: ["pungent", "sweet", "caramelized"],
+    dishes: ["burger"], roles: { burger: "veggie" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["würzig", "süßlich", "karamellisiert"],
+    noun_form: "Schicht", rarity: 2
+  },
+  {
+    id: "burger_pickelzwiebel", name: "Pickels", emoji: "🥒",
+    tags: ["tangy", "crispy", "acidic"],
+    dishes: ["burger"], roles: { burger: "veggie" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["sauer", "knackig", "erfrischend"],
+    noun_form: "Säure", rarity: 2
+  },
+  {
+    id: "burger_avocado", name: "Avocado", emoji: "🥑",
+    tags: ["creamy", "rich", "buttery"],
+    dishes: ["burger"], roles: { burger: "veggie" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["cremig", "exotisch", "luxuriös"],
+    noun_form: "Traum", rarity: 4
+  },
+  {
+    id: "burger_jalapeno", name: "Jalapeños", emoji: "🌶️",
+    tags: ["spicy", "fresh", "crisp"],
+    dishes: ["burger"], roles: { burger: "veggie" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["scharf", "kühn", "exotisch"],
+    noun_form: "Feuer", rarity: 4
+  },
+
+  // ─── BURGER: garnish ────────────────────────────────────────────────────
+  {
+    id: "burger_speck", name: "Speck", emoji: "🥓",
+    tags: ["crispy", "smoky", "savory"],
+    dishes: ["burger"], roles: { burger: "garnish" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["knusprig", "rauchig", "herzhaft"],
+    noun_form: "Traum", rarity: 3
+  },
+  {
+    id: "burger_ei", name: "Ei", emoji: "🥚",
+    tags: ["creamy", "rich", "runny"],
+    dishes: ["burger"], roles: { burger: "garnish" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["cremig", "goldgelb", "luxuriös"],
+    noun_form: "Glück", rarity: 4
+  },
+  {
+    id: "burger_crispy_onion", name: "Crispy Onion", emoji: "✨",
+    tags: ["crispy", "umami", "sweet"],
+    dishes: ["burger"], roles: { burger: "garnish" },
+    excludes: [], amazon_asin: null,
+    tags_name: ["knusprig", "würzig", "golden"],
+    noun_form: "Gold", rarity: 3
   }
 ];

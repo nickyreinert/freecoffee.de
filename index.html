@@ -66,6 +66,7 @@
     .dish-tab[data-dish="salat"][data-active]    { border-color: #2A6B35; background: #F4FAF4; color: #2A6B35; box-shadow: 0 2px 10px rgba(42,107,53,.15); }
     .dish-tab[data-dish="cocktail"][data-active] { border-color: #6B3A8B; background: #FAF4FF; color: #6B3A8B; box-shadow: 0 2px 10px rgba(107,58,139,.15); }
     .dish-tab[data-dish="coffee"][data-active]   { border-color: #6B5344; background: #FEF5F2; color: #6B5344; box-shadow: 0 2px 10px rgba(107,83,68,.15); }
+    .dish-tab[data-dish="burger"][data-active]   { border-color: #C8391D; background: #FFF4F2; color: #C8391D; box-shadow: 0 2px 10px rgba(200,57,29,.15); }
 
     /* ── Generate button colours ─────────────────────────────────── */
     #generate-btn {
@@ -90,6 +91,7 @@
     #generate-btn.btn-salat    { background: linear-gradient(135deg,#2A6B35,#358042); box-shadow: 0 6px 24px rgba(42,107,53,.35); }
     #generate-btn.btn-cocktail { background: linear-gradient(135deg,#6B3A8B,#7D489F); box-shadow: 0 6px 24px rgba(107,58,139,.35); }
     #generate-btn.btn-coffee   { background: linear-gradient(135deg,#6B5344,#7D6851); box-shadow: 0 6px 24px rgba(107,83,68,.35); }
+    #generate-btn.btn-burger   { background: linear-gradient(135deg,#C8391D,#E04A2C); box-shadow: 0 6px 24px rgba(200,57,29,.35); }
 
     /* ── Recipe card ─────────────────────────────────────────────── */
     .recipe-card {
@@ -99,7 +101,12 @@
       box-shadow: 0 4px 28px rgba(120,80,30,.1), 0 1px 4px rgba(120,80,30,.06);
     }
 
-    /* ── Ingredient badge ────────────────────────────────────────── */
+    /* ── Ingredient badge with quick ignore ──────────────────────── */
+    .ing-badge-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
     .ing-badge {
       display: inline-flex;
       align-items: center;
@@ -114,6 +121,34 @@
       transition: border-color .12s;
     }
     .ing-badge:hover { border-color: #C2A882; }
+
+    .ing-ignore-btn {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #F5B8B8;
+      border: 1px solid #F59E9E;
+      color: #991B1B;
+      font-size: 0.65rem;
+      font-weight: bold;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity .12s, background .12s, border-color .12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .ing-badge-wrapper:hover .ing-ignore-btn {
+      opacity: 1;
+    }
+    .ing-ignore-btn:hover {
+      background: #F5A8A8;
+      border-color: #F08080;
+    }
 
     /* ── Slot label ──────────────────────────────────────────────── */
     .slot-label {
@@ -243,7 +278,7 @@
   <!-- ══════════════════════════════════════════════════════════════
        Dish selector
   ═══════════════════════════════════════════════════════════════ -->
-  <div class="grid grid-cols-5 gap-2.5 mb-5">
+  <div class="grid grid-cols-6 gap-2.5 mb-5">
     <button class="dish-tab" data-dish="pizza">
       <span class="text-[28px] leading-none">🍕</span>
       <span>Pizza</span>
@@ -263,6 +298,10 @@
     <button class="dish-tab" data-dish="coffee">
       <span class="text-[28px] leading-none">☕</span>
       <span>Kaffee</span>
+    </button>
+    <button class="dish-tab" data-dish="burger">
+      <span class="text-[28px] leading-none">🍔</span>
+      <span>Burger</span>
     </button>
   </div>
 
