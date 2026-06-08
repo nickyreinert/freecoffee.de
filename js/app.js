@@ -106,9 +106,18 @@ function renderFoodResult(dish, config) {
     const pills = document.createElement("div");
     pills.className = "flex flex-wrap gap-1.5";
     for (const ing of slot.ingredients) {
-      const badge = document.createElement("span");
-      badge.className = "ing-badge";
-      badge.textContent = `${ing.emoji} ${ing.name}`;
+      const badge = document.createElement("div");
+      badge.className = "ing-badge-wrapper";
+      badge.innerHTML = `
+        <span class="ing-badge">${ing.emoji} ${ing.name}</span>
+        <button class="ing-ignore-btn" title="Zur Kotzliste hinzufügen" data-id="${ing.id}">✕</button>
+      `;
+      const ignoreBtn = badge.querySelector(".ing-ignore-btn");
+      ignoreBtn.addEventListener("click", e => {
+        e.stopPropagation();
+        toggleKotzliste(ing.id);
+        renderFoodResult(dish, config);
+      });
       pills.appendChild(badge);
     }
     row.appendChild(pills);

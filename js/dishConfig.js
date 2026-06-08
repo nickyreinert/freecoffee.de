@@ -57,6 +57,21 @@ export const DISH_CONFIGS = {
       { role: "garnish", min: 0, max: 1, required: false, label: "Garnish" }
     ],
     prepText: "Zutaten auf Eis shaken oder rühren. Nach Geschmack garnieren."
+  },
+  burger: {
+    type: "burger",
+    label: "Burger",
+    emoji: "🍔",
+    color: "red",
+    slots: [
+      { role: "bun",      min: 1, max: 1, required: true,  label: "Brötchen" },
+      { role: "patty",    min: 1, max: 2, required: true,  label: "Patty" },
+      { role: "cheese",   min: 0, max: 2, required: false, label: "Käse" },
+      { role: "sauce",    min: 1, max: 2, required: true,  label: "Sauce" },
+      { role: "veggie",   min: 1, max: 3, required: true,  label: "Belag" },
+      { role: "garnish",  min: 0, max: 2, required: false, label: "Extras" }
+    ],
+    prepText: "Brötchen leicht toasten, Patty garen, Sauce verteilen, Belag auflegen. Sofort servieren."
   }
 };
 
