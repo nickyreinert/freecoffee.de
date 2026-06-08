@@ -1,6 +1,7 @@
 // freecoffee.de — main application
 import { INGREDIENTS } from "./ingredients.js";
-import { DISH_CONFIGS } from "./dishConfig.js";
+import { DISH_CONFIGS, COFFEE_CONFIG } from "./dishConfig.js";
+import { COFFEES } from "./coffees.js";
 import { generate } from "./generator.js";
 import { loadProfile, toggleFavorite, toggleKotzliste, encodeProfile, decodeProfile } from "./profile.js";
 import { buildCartUrl, findRariestIngredient, buildSingleAsinUrl, buildSearchUrl } from "./amazon.js";
@@ -44,6 +45,9 @@ function setActiveDish(type) {
 
   generateBtn.className = generateBtn.className
     .replace(/\bbtn-\w+/g, "").trim() + ` btn-${type}`;
+
+  // Hide profile button when coffee mode is active (no ingredient profile for coffee)
+  profileBtn.style.visibility = type === "coffee" ? "hidden" : "";
 }
 
 dishTabs.forEach(btn => btn.addEventListener("click", () => setActiveDish(btn.dataset.dish)));
@@ -52,11 +56,16 @@ dishTabs.forEach(btn => btn.addEventListener("click", () => setActiveDish(btn.da
 function doGenerate() {
   errorEl.classList.add("hidden");
   try {
-    const profile = loadProfile();
-    const config  = DISH_CONFIGS[activeDish];
-    const result  = generate(activeDish, profile, INGREDIENTS, config);
-    currentResult = result;
-    renderResult(result, config);
+    if (activeDish === "coffee") {
+      currentResult = generateCoffee();
+      renderCoffeeResult(currentResult);
+    } else {
+      const profile = loadProfile();
+      const config  = DISH_CONFIGS[activeDish];
+      const result  = generate(activeDish, profile, INGREDIENTS, config);
+      currentResult = result;
+      renderFoodResult(result, config);
+    }
   } catch (err) {
     errorEl.textContent = `Fehler: ${err.message}`;
     errorEl.classList.remove("hidden");
@@ -66,12 +75,25 @@ function doGenerate() {
 generateBtn.addEventListener("click", doGenerate);
 rerollBtn.addEventListener("click", doGenerate);
 
-// ─── Render result ────────────────────────────────────────────────────────────
-function renderResult(dish, config) {
-  // Dish name
+// ─── Coffee generator ─────────────────────────────────────────────────────────
+function generateCoffee() {
+  const item = COFFEES[Math.floor(Math.random() * COFFEES.length)];
+  return {
+    id: `coffee-${Date.now()}`,
+    type: "coffee",
+    name: item.name,
+    origin: item.origin,
+    meaning: item.meaning,
+    progress: item.progress,
+    ingredients: item.ingredients,
+    generated_at: new Date().toISOString()
+  };
+}
+
+// ─── Render: food result ──────────────────────────────────────────────────────
+function renderFoodResult(dish, config) {
   dishNameEl.innerHTML = `<span class="text-2xl">${config.emoji}</span><span>${dish.name}</span>`;
 
-  // Slots
   slotsEl.innerHTML = "";
   for (const slot of dish.slots) {
     if (!slot.ingredients.length) continue;
@@ -93,7 +115,7 @@ function renderResult(dish, config) {
     slotsEl.appendChild(row);
   }
 
-  // Amazon — full cart (only if real ASINs exist)
+  // Amazon
   const allSelected = dish.slots.flatMap(s => s.ingredients);
   const cartUrl = buildCartUrl(allSelected, ASSOCIATE_TAG);
   if (cartUrl) {
@@ -103,7 +125,7 @@ function renderResult(dish, config) {
     amazonBtn.classList.add("hidden");
   }
 
-  // Special ingredient — always show for rarity ≥ 6, fall back to search URL
+  // Special ingredient
   const rarest = findRariestIngredient(allSelected.filter(i => (i.rarity ?? 0) >= 6));
   if (rarest) {
     const linkUrl = buildSingleAsinUrl(rarest, ASSOCIATE_TAG) ?? buildSearchUrl(rarest, ASSOCIATE_TAG);
@@ -122,7 +144,43 @@ function renderResult(dish, config) {
     specialEl.classList.add("hidden");
   }
 
-  // Animate
+  showResultCard();
+}
+
+// ─── Render: coffee result ────────────────────────────────────────────────────
+function renderCoffeeResult(coffee) {
+  dishNameEl.innerHTML = `<span class="text-2xl">☕</span><span>${coffee.name}</span>`;
+
+  slotsEl.innerHTML = `
+    <div class="flex items-center gap-2 mb-1">
+      <span class="slot-label">Herkunft</span>
+      <span class="ing-badge">${coffee.origin}</span>
+    </div>
+    <div class="flex items-start gap-2 mb-3">
+      <span class="slot-label" style="padding-top:1px">Was</span>
+      <span class="text-sm text-[#5C4030] italic leading-snug">${coffee.meaning}</span>
+    </div>
+    <div class="flex flex-wrap items-start gap-2 mb-3">
+      <span class="slot-label">Zutaten</span>
+      <div class="flex flex-wrap gap-1.5">
+        ${coffee.ingredients.map(i => `<span class="ing-badge">${i}</span>`).join("")}
+      </div>
+    </div>
+    <div class="flex items-start gap-2">
+      <span class="slot-label" style="padding-top:1px">Methode</span>
+      <p class="text-sm text-[#3A2810] leading-relaxed flex-1">${coffee.progress}</p>
+    </div>
+  `;
+
+  // No Amazon or special ingredient for coffee
+  amazonBtn.classList.add("hidden");
+  specialBtn.classList.add("hidden");
+  specialEl.classList.add("hidden");
+
+  showResultCard();
+}
+
+function showResultCard() {
   resultCard.classList.remove("hidden");
   resultCard.classList.add("animate-slide-up");
   setTimeout(() => resultCard.classList.remove("animate-slide-up"), 500);
@@ -134,7 +192,8 @@ specialBtn.addEventListener("click", () => specialEl.classList.toggle("hidden"))
 pdfBtn.addEventListener("click", () => {
   if (!currentResult) return;
   if (!window.jspdf) { alert("jsPDF noch nicht geladen. Bitte kurz warten."); return; }
-  exportPDF(currentResult, DISH_CONFIGS[currentResult.type]);
+  const config = currentResult.type === "coffee" ? COFFEE_CONFIG : DISH_CONFIGS[currentResult.type];
+  exportPDF(currentResult, config);
 });
 
 // ─── Profile panel ────────────────────────────────────────────────────────────
