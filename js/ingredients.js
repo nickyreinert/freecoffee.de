@@ -41,7 +41,7 @@ export const INGREDIENTS = [
     id: "arrabiata", name: "Arrabiata", emoji: "🌶️",
     tags: ["spicy", "tangy", "fiery"],
     dishes: ["pizza"], roles: { pizza: "sauce" },
-    excludes: [], amazon_asin: "B09TXYZ001",
+    excludes: [], amazon_asin: null,
     tags_name: ["scharf", "feurig", "temperamentvoll"],
     noun_form: "Feuer", rarity: 5
   },
@@ -49,7 +49,7 @@ export const INGREDIENTS = [
     id: "pesto_rosso", name: "Pesto Rosso", emoji: "🫙",
     tags: ["rich", "sun-dried", "intense"],
     dishes: ["pizza"], roles: { pizza: "sauce" },
-    excludes: [], amazon_asin: "B09TXYZ002",
+    excludes: [], amazon_asin: null,
     tags_name: ["satt", "intensiv", "mediterran"],
     noun_form: "Pesto", rarity: 6
   },
@@ -69,7 +69,7 @@ export const INGREDIENTS = [
     tags: ["rich", "creamy", "premium"],
     dishes: ["pizza"], roles: { pizza: "cheese" },
     excludes: ["thunfisch", "garnelen"],
-    amazon_asin: "B09TXYZ003",
+    amazon_asin: null,
     tags_name: ["sahnig", "edel", "büffelig"],
     noun_form: "Büfala", rarity: 7
   },
@@ -78,7 +78,7 @@ export const INGREDIENTS = [
     tags: ["pungent", "bold", "creamy"],
     dishes: ["pizza"], roles: { pizza: "cheese" },
     excludes: ["thunfisch", "garnelen"],
-    amazon_asin: "B09TXYZ004",
+    amazon_asin: null,
     tags_name: ["wuchtig", "kühn", "charaktervoll"],
     noun_form: "Gorgonzola", rarity: 7
   },
@@ -87,7 +87,7 @@ export const INGREDIENTS = [
     tags: ["salty", "umami", "aged"],
     dishes: ["pizza", "salat"], roles: { pizza: "cheese", salat: "garnish" },
     excludes: ["thunfisch", "garnelen"],
-    amazon_asin: "B09TXYZ005",
+    amazon_asin: null,
     tags_name: ["salzig", "gereift", "intensiv"],
     noun_form: "Parmesan", rarity: 4
   },
@@ -97,7 +97,7 @@ export const INGREDIENTS = [
     id: "nduja", name: "Nduja", emoji: "🌶️",
     tags: ["spicy", "fatty", "smoky", "italian"],
     dishes: ["pizza", "stulle"], roles: { pizza: "protein", stulle: "spread" },
-    excludes: [], amazon_asin: "B07ABC456",
+    excludes: [], amazon_asin: null,
     tags_name: ["scharf", "rauchig", "wuchtig"],
     noun_form: "Nduja", rarity: 9
   },
@@ -113,7 +113,7 @@ export const INGREDIENTS = [
     id: "prosciutto", name: "Prosciutto", emoji: "🥩",
     tags: ["savory", "delicate", "italian"],
     dishes: ["pizza"], roles: { pizza: "protein" },
-    excludes: [], amazon_asin: "B09TXYZ006",
+    excludes: [], amazon_asin: null,
     tags_name: ["zart", "edel", "toskanisch"],
     noun_form: "Prosciutto", rarity: 7
   },
@@ -122,7 +122,7 @@ export const INGREDIENTS = [
     tags: ["oceanic", "savory", "mediterranean"],
     dishes: ["pizza", "salat"], roles: { pizza: "protein", salat: "protein" },
     excludes: ["mozzarella", "bueffel_mozzarella", "gorgonzola", "parmesan"],
-    amazon_asin: "B09TXYZ007",
+    amazon_asin: null,
     tags_name: ["meerig", "frisch", "maritim"],
     noun_form: "Thunfisch", rarity: 3
   },
@@ -131,7 +131,7 @@ export const INGREDIENTS = [
     tags: ["oceanic", "delicate", "fresh"],
     dishes: ["pizza", "salat"], roles: { pizza: "protein", salat: "protein" },
     excludes: ["mozzarella", "bueffel_mozzarella", "gorgonzola", "parmesan"],
-    amazon_asin: "B09TXYZ008",
+    amazon_asin: null,
     tags_name: ["meerig", "delikat", "knackig"],
     noun_form: "Garnele", rarity: 6
   },
@@ -158,7 +158,7 @@ export const INGREDIENTS = [
     id: "artischocken", name: "Artischocken", emoji: "🌿",
     tags: ["earthy", "mild", "mediterranean"],
     dishes: ["pizza", "salat"], roles: { pizza: "veggie", salat: "veggie" },
-    excludes: [], amazon_asin: "B09TXYZ009",
+    excludes: [], amazon_asin: null,
     tags_name: ["mediterran", "edel", "sanft"],
     noun_form: "Artischocke", rarity: 7
   },
@@ -174,7 +174,7 @@ export const INGREDIENTS = [
     id: "oliven", name: "Oliven", emoji: "🫒",
     tags: ["salty", "briny", "mediterranean"],
     dishes: ["pizza", "salat"], roles: { pizza: "veggie", salat: "veggie" },
-    excludes: [], amazon_asin: "B09TXYZ010",
+    excludes: [], amazon_asin: null,
     tags_name: ["griechisch", "salzig", "mediterran"],
     noun_form: "Olive", rarity: 4
   },
@@ -192,7 +192,7 @@ export const INGREDIENTS = [
     id: "chili_flakes", name: "Chili-Flakes", emoji: "🌶️",
     tags: ["spicy", "hot", "intense"],
     dishes: ["pizza"], roles: { pizza: "garnish" },
-    excludes: [], amazon_asin: "B09TXYZ011",
+    excludes: [], amazon_asin: null,
     tags_name: ["scharf", "heiß", "mutig"],
     noun_form: "Chili", rarity: 4
   },
@@ -200,7 +200,7 @@ export const INGREDIENTS = [
     id: "trueffeloel", name: "Trüffelöl", emoji: "✨",
     tags: ["luxurious", "earthy", "aromatic"],
     dishes: ["pizza"], roles: { pizza: "garnish" },
-    excludes: [], amazon_asin: "B09TXYZ012",
+    excludes: [], amazon_asin: null,
     tags_name: ["luxuriös", "edel", "trüffelig"],
     noun_form: "Trüffel", rarity: 10
   },
@@ -226,7 +226,7 @@ export const INGREDIENTS = [
     id: "pumpernickel", name: "Pumpernickel", emoji: "🍫",
     tags: ["sweet", "dense", "intense"],
     dishes: ["stulle"], roles: { stulle: "base_bread" },
-    excludes: [], amazon_asin: "B09TXYZ013",
+    excludes: [], amazon_asin: null,
     tags_name: ["westfälisch", "intensiv", "dunkel"],
     noun_form: "Pumpernickel", rarity: 5
   },
@@ -234,7 +234,7 @@ export const INGREDIENTS = [
     id: "sauerteigbrot", name: "Sauerteigbrot", emoji: "🍞",
     tags: ["sour", "complex", "artisan"],
     dishes: ["stulle"], roles: { stulle: "base_bread" },
-    excludes: [], amazon_asin: "B09TXYZ014",
+    excludes: [], amazon_asin: null,
     tags_name: ["sauer", "komplex", "handwerklich"],
     noun_form: "Sauerteig", rarity: 6
   },
@@ -268,7 +268,7 @@ export const INGREDIENTS = [
     id: "hummus", name: "Hummus", emoji: "🫘",
     tags: ["earthy", "nutty", "middle-eastern"],
     dishes: ["stulle"], roles: { stulle: "spread" },
-    excludes: [], amazon_asin: "B09TXYZ015",
+    excludes: [], amazon_asin: null,
     tags_name: ["orientalisch", "nussig", "satt"],
     noun_form: "Hummus", rarity: 5
   },
@@ -286,7 +286,7 @@ export const INGREDIENTS = [
     id: "lachs", name: "Räucherlachs", emoji: "🐟",
     tags: ["smoky", "oceanic", "premium"],
     dishes: ["stulle"], roles: { stulle: "protein" },
-    excludes: [], amazon_asin: "B09TXYZ016",
+    excludes: [], amazon_asin: null,
     tags_name: ["rauchig", "atlantisch", "edel"],
     noun_form: "Lachs", rarity: 7
   },
@@ -346,7 +346,7 @@ export const INGREDIENTS = [
     id: "kapern", name: "Kapern", emoji: "🫙",
     tags: ["salty", "briny", "tangy"],
     dishes: ["stulle"], roles: { stulle: "garnish" },
-    excludes: [], amazon_asin: "B09TXYZ017",
+    excludes: [], amazon_asin: null,
     tags_name: ["salzig", "kapriziös", "mediterran"],
     noun_form: "Kaper", rarity: 7
   },
@@ -390,7 +390,7 @@ export const INGREDIENTS = [
     id: "halloumi", name: "Halloumi", emoji: "🧀",
     tags: ["salty", "squeaky", "grilled"],
     dishes: ["salat"], roles: { salat: "protein" },
-    excludes: [], amazon_asin: "B09TXYZ018",
+    excludes: [], amazon_asin: null,
     tags_name: ["zypriotisch", "salzig", "gegrillt"],
     noun_form: "Halloumi", rarity: 7
   },
@@ -416,7 +416,7 @@ export const INGREDIENTS = [
     id: "kuerbiskerne", name: "Kürbiskerne", emoji: "🌰",
     tags: ["nutty", "green", "crunchy"],
     dishes: ["salat"], roles: { salat: "crunch" },
-    excludes: [], amazon_asin: "B09TXYZ019",
+    excludes: [], amazon_asin: null,
     tags_name: ["nussig", "knackig", "herbstlich"],
     noun_form: "Kürbis", rarity: 4
   },
@@ -442,7 +442,7 @@ export const INGREDIENTS = [
     id: "caesar_dressing", name: "Caesar-Dressing", emoji: "🫙",
     tags: ["rich", "creamy", "umami"],
     dishes: ["salat"], roles: { salat: "dressing" },
-    excludes: [], amazon_asin: "B09TXYZ020",
+    excludes: [], amazon_asin: null,
     tags_name: ["kaiserlich", "cremig", "würzig"],
     noun_form: "Caesar", rarity: 4
   },
@@ -460,7 +460,7 @@ export const INGREDIENTS = [
     id: "campari", name: "Campari", emoji: "🍷",
     tags: ["bitter", "herbal", "italian"],
     dishes: ["cocktail"], roles: { cocktail: "spirit" },
-    excludes: [], amazon_asin: "B06DEF789",
+    excludes: [], amazon_asin: null,
     tags_name: ["bitter", "herb", "komplex"],
     noun_form: "Campari", rarity: 6
   },
@@ -468,7 +468,7 @@ export const INGREDIENTS = [
     id: "gin", name: "Gin", emoji: "🍸",
     tags: ["botanical", "juniper", "dry"],
     dishes: ["cocktail"], roles: { cocktail: "spirit" },
-    excludes: [], amazon_asin: "B09TXYZ021",
+    excludes: [], amazon_asin: null,
     tags_name: ["botanisch", "trocken", "elegant"],
     noun_form: "Gin", rarity: 5
   },
@@ -476,7 +476,7 @@ export const INGREDIENTS = [
     id: "rum", name: "Rum", emoji: "🥃",
     tags: ["sweet", "tropical", "bold"],
     dishes: ["cocktail"], roles: { cocktail: "spirit" },
-    excludes: [], amazon_asin: "B09TXYZ022",
+    excludes: [], amazon_asin: null,
     tags_name: ["karibisch", "tropisch", "süß"],
     noun_form: "Rum", rarity: 4
   },
@@ -492,7 +492,7 @@ export const INGREDIENTS = [
     id: "aperol", name: "Aperol", emoji: "🍊",
     tags: ["bitter-sweet", "orange", "italian"],
     dishes: ["cocktail"], roles: { cocktail: "spirit" },
-    excludes: [], amazon_asin: "B09TXYZ023",
+    excludes: [], amazon_asin: null,
     tags_name: ["spritzig", "orange", "leicht"],
     noun_form: "Aperol", rarity: 4
   },
@@ -500,7 +500,7 @@ export const INGREDIENTS = [
     id: "tequila", name: "Tequila", emoji: "🥃",
     tags: ["agave", "earthy", "bold"],
     dishes: ["cocktail"], roles: { cocktail: "spirit" },
-    excludes: [], amazon_asin: "B09TXYZ024",
+    excludes: [], amazon_asin: null,
     tags_name: ["mexikanisch", "mutig", "agave"],
     noun_form: "Tequila", rarity: 6
   },
@@ -510,7 +510,7 @@ export const INGREDIENTS = [
     id: "tonic_water", name: "Tonic Water", emoji: "🫧",
     tags: ["bitter", "fizzy", "refreshing"],
     dishes: ["cocktail"], roles: { cocktail: "mixer" },
-    excludes: [], amazon_asin: "B09TXYZ025",
+    excludes: [], amazon_asin: null,
     tags_name: ["sprudelnd", "bitter", "erfrischend"],
     noun_form: "Tonic", rarity: 3
   },
@@ -542,7 +542,7 @@ export const INGREDIENTS = [
     id: "prosecco", name: "Prosecco", emoji: "🥂",
     tags: ["bubbly", "light", "festive"],
     dishes: ["cocktail"], roles: { cocktail: "mixer" },
-    excludes: [], amazon_asin: "B09TXYZ026",
+    excludes: [], amazon_asin: null,
     tags_name: ["sprudelnd", "festlich", "leicht"],
     noun_form: "Prosecco", rarity: 5
   },
@@ -552,7 +552,7 @@ export const INGREDIENTS = [
     id: "honigsirup", name: "Honigsirup", emoji: "🍯",
     tags: ["sweet", "floral", "natural"],
     dishes: ["cocktail"], roles: { cocktail: "sweet" },
-    excludes: [], amazon_asin: "B09TXYZ027",
+    excludes: [], amazon_asin: null,
     tags_name: ["honig", "süß", "blütig"],
     noun_form: "Honig", rarity: 5
   },
@@ -568,7 +568,7 @@ export const INGREDIENTS = [
     id: "grenadine", name: "Grenadine", emoji: "🍒",
     tags: ["sweet", "fruity", "red"],
     dishes: ["cocktail"], roles: { cocktail: "sweet" },
-    excludes: [], amazon_asin: "B09TXYZ028",
+    excludes: [], amazon_asin: null,
     tags_name: ["rot", "süß", "romantisch"],
     noun_form: "Grenadine", rarity: 6
   },

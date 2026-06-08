@@ -1,0 +1,12 @@
+{
+  "name": "freecoffee-tools",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Utility scripts for freecoffee.de development",
+  "scripts": {
+    "scrape": "node scrape-asins.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12"
+  }
+}

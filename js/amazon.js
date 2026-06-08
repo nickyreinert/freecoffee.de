@@ -1,6 +1,7 @@
 // Amazon PartnerNet cart URL builder
 
 const BASE_URL = "https://www.amazon.de/gp/aws/cart/add.html";
+const SEARCH_URL = "https://www.amazon.de/s";
 
 export function buildCartUrl(ingredients, associateTag) {
   const withAsin = ingredients.filter(i => i.amazon_asin !== null);
@@ -12,6 +13,12 @@ export function buildCartUrl(ingredients, associateTag) {
     params.set(`Quantity.${idx + 1}`, "1");
   });
   return `${BASE_URL}?${params.toString()}`;
+}
+
+export function buildSearchUrl(ingredient, associateTag) {
+  if (!ingredient) return null;
+  const params = new URLSearchParams({ k: ingredient.name, tag: associateTag });
+  return `${SEARCH_URL}?${params.toString()}`;
 }
 
 export function findRariestIngredient(ingredients) {
