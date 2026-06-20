@@ -11,7 +11,7 @@
   <!-- IDH Design System: Manrope + IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=VT323&display=swap" rel="stylesheet">
 
   <!-- Lucide icons -->
   <script src="https://unpkg.com/lucide@0.544.0/dist/umd/lucide.min.js"></script>
@@ -413,6 +413,34 @@
     }
     .font-display { font-family: var(--font-sans) !important; }
     .hidden { display: none !important; }
+
+    /* ── Dot matrix display: dish name readout ───────────────────── */
+    #dish-name > span:nth-child(2) {
+      font-family: 'VT323', var(--font-mono);
+      font-size: 2rem;
+      font-weight: var(--fw-regular);
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+      display: inline-block;
+      position: relative;
+      padding: 5px 14px 3px;
+      background: var(--surface-sunken);
+      box-shadow: var(--nm-sunken-md);
+      border-radius: var(--radius-sm);
+      line-height: 1.2;
+    }
+    /* Unlit dot grid overlay — simulates the dot matrix screen */
+    #dish-name > span:nth-child(2)::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background-image: radial-gradient(circle, var(--n-200) 1.2px, transparent 1.2px);
+      background-size: 4px 4px;
+      pointer-events: none;
+      opacity: 0.55;
+    }
   </style>
 </head>
 
